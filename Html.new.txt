@@ -1,0 +1,141 @@
+ var chatHtml = `
+      <style>
+        #netflix-player.with-chat {
+          width: calc(100% - ${chatSidebarWidth}px) !important;
+        }
+
+        #chat-container, #chat-container * {
+          box-sizing: border-box;
+        }
+
+        #chat-container {
+          width: ${chatSidebarWidth}px;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          cursor: auto;
+          user-select: text;
+          -webkit-user-select: text;
+          z-index: 9999999999;
+          padding: ${chatSidebarPadding}px;
+        }
+
+        #chat-container #chat-history-container {
+          height: calc(100% - ${chatMessageVerticalPadding * 2 + avatarSize + avatarPadding * 2 + avatarBorder * 2 + chatVericalMargin * 2 + presenceIndicatorHeight}px);
+          position: relative;
+        }
+
+        #chat-container #chat-history-container #chat-history {
+          width: ${chatSidebarWidth - chatSidebarPadding * 2}px;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          max-height: 100%;
+          overflow: auto;
+        }
+
+        #chat-container #chat-history-container #chat-history .chat-message {
+          background-color: #222;
+          color: #999;
+          padding: ${chatMessageVerticalPadding}px ${chatMessageHorizontalPadding}px;
+          margin-top: ${chatVericalMargin}px;
+          border-radius: 2px;
+          word-wrap: break-word;
+          overflow: auto;
+        }
+
+        #chat-container #chat-history-container #chat-history .chat-message .chat-message-avatar {
+          float: left;
+          width: ${avatarSize + avatarPadding * 2 + avatarBorder * 2}px;
+          height: ${avatarSize + avatarPadding * 2 + avatarBorder * 2}px;
+          padding: ${avatarPadding}px;
+          border: ${avatarBorder}px solid #444;
+          border-radius: 2px;
+        }
+
+        #chat-container #chat-history-container #chat-history .chat-message .chat-message-avatar img {
+          display: block;
+          width: ${avatarSize}px;
+          height: ${avatarSize}px;
+        }
+
+        #chat-container #chat-history-container #chat-history .chat-message .chat-message-body {
+          padding-left: ${avatarSize + avatarPadding * 2 + avatarBorder * 2 + chatMessageHorizontalPadding}px;
+        }
+
+        #chat-container #chat-history-container #chat-history .chat-message.system-message .chat-message-body {
+          font-style: italic;
+          color: #666;
+        }
+
+        #chat-container #presence-indicator {
+          position: absolute;
+          left: ${chatSidebarPadding}px;
+          bottom: ${chatSidebarPadding + chatMessageVerticalPadding * 2 + avatarSize + avatarPadding * 2 + avatarBorder * 2 + chatVericalMargin}px;
+          width: ${chatSidebarWidth - chatSidebarPadding * 2}px;
+          height: ${presenceIndicatorHeight}px;
+          line-height: ${presenceIndicatorHeight}px;
+          color: #666;
+          font-style: italic;
+        }
+
+        #chat-container #chat-input-container {
+          position: absolute;
+          height: ${chatMessageVerticalPadding * 2 + avatarSize + avatarPadding * 2 + avatarBorder * 2}px;
+          left: ${chatSidebarPadding}px;
+          bottom: ${chatSidebarPadding}px;
+          width: ${chatSidebarWidth - chatSidebarPadding * 2}px;
+          background-color: #111;
+          border: ${chatInputBorder}px solid #333;
+          border-radius: 2px;
+          overflow: auto;
+          cursor: text;
+        }
+
+        #chat-container #chat-input-container #chat-input-avatar {
+          float: left;
+          width: ${avatarSize + avatarPadding * 2 + avatarBorder * 2}px;
+          height: ${avatarSize + avatarPadding * 2 + avatarBorder * 2}px;
+          padding: ${avatarPadding}px;
+          border: ${avatarBorder}px solid #333;
+          margin-left: ${chatMessageHorizontalPadding - chatInputBorder}px;
+          margin-top: ${chatMessageVerticalPadding - chatInputBorder}px;
+          margin-bottom: ${chatMessageVerticalPadding - chatInputBorder}px;
+          border-radius: 2px;
+        }
+
+        #chat-container #chat-input-container #chat-input-avatar img {
+          display: block;
+          width: ${avatarSize}px;
+          height: ${avatarSize}px;
+        }
+
+        #chat-container #chat-input-container #chat-input {
+          display: block;
+          height: ${avatarSize + avatarPadding * 2 + avatarBorder * 2 + chatMessageVerticalPadding * 2 - chatInputBorder * 2}px;
+          line-height: ${avatarSize + avatarPadding * 2 + avatarBorder * 2}px;
+          width: ${chatSidebarWidth - chatSidebarPadding * 2 - avatarSize - avatarPadding * 2 - avatarBorder * 2 - chatMessageHorizontalPadding - chatInputBorder}px;
+          margin-left: ${avatarSize + avatarPadding * 2 + avatarBorder * 2 + chatMessageHorizontalPadding - chatInputBorder}px;
+          background-color: #111;
+          border: none;
+          outline-style: none;
+          color: #999;
+          padding-top: ${chatMessageVerticalPadding - chatInputBorder}px;
+          padding-right: ${chatMessageHorizontalPadding - chatInputBorder}px;
+          padding-bottom: ${chatMessageVerticalPadding - chatInputBorder}px;
+          padding-left: ${chatMessageHorizontalPadding}px;
+        }
+      </style>
+      <div id="chat-container">
+        <div id="chat-history-container">
+          <div id="chat-history"></div>
+        </div>
+        <div id="presence-indicator">People are typing...</div>
+        <div id="chat-input-container">
+          <div id="chat-input-avatar"></div>
+          <input id="chat-input"></input>
+        </div>
+      </div>
+    `;

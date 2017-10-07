@@ -5,12 +5,12 @@
 
   "name": "__MSG_extName__",
   "description": "__MSG_extDescription__",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "default_locale": "en",
   "permissions": [
     "activeTab",
     "declarativeContent",
-    "http://tonirebollo.me/not.mp3"
+    "storage"
   ],
   "page_action": {
     "default_icon": {
